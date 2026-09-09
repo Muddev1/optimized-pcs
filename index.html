@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Optimized PCs — PC Parts &amp; Custom Builds</title>
+<link rel="icon" href="logo.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="#top" class="brand">
+      <img src="logo.png" alt="Optimized PCs" class="brand-logo">
+      <span class="brand-name">OPTIMIZED PCS</span>
+    </a>
+
+    <nav class="main-nav" id="main-nav">
+      <a href="#shop">Shop</a>
+      <a href="#custom">Custom Builds</a>
+      <a href="#why">Why Us</a>
+      <a href="#contact">Contact</a>
+    </nav>
+
+    <div class="header-actions">
+      <button class="icon-btn" id="cart-btn" aria-label="Open cart">
+        🛒 <span class="cart-count">0</span>
+      </button>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ===== CART DRAWER ===== -->
+<div class="cart-overlay" id="cart-overlay"></div>
+<aside class="cart-drawer" id="cart-drawer" aria-hidden="true">
+  <div class="cart-header">
+    <h3>Your Cart</h3>
+    <button class="cart-close" id="cart-close" aria-label="Close cart">&times;</button>
+  </div>
+  <div class="cart-items" id="cart-items">
+    <p class="cart-empty">Your cart is empty.</p>
+  </div>
+  <div class="cart-footer">
+    <div class="cart-subtotal">
+      <span>Subtotal</span>
+      <span id="cart-subtotal">$0</span>
+    </div>
+    <button class="btn btn-primary cart-checkout" id="cart-checkout">Checkout</button>
+  </div>
+</aside>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="top">
+  <div class="hero-bg">
+    <div class="diag diag-pink"></div>
+    <div class="diag diag-blue"></div>
+  </div>
+  <div class="container hero-inner">
+    <div class="hero-copy">
+      <p class="eyebrow">PC PARTS &amp; CUSTOM BUILDS</p>
+      <h1>WE SELL PC PARTS<br>AND BUILD<br>CUSTOMS FOR YOU</h1>
+      <p class="hero-sub">We also have an online store if you don't feel like buying in person.</p>
+      <div class="hero-cta">
+        <a href="#shop" class="btn btn-primary">Shop Parts</a>
+        <a href="#custom" class="btn btn-outline">Start a Custom Build</a>
+      </div>
+    </div>
+    <div class="hero-media">
+      <div class="hero-product-card">
+        <div class="glow"></div>
+        <div class="product-placeholder gpu-shape">
+          <span class="fan"></span><span class="fan"></span><span class="fan"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CATEGORIES ===== -->
+<section class="categories" id="shop">
+  <div class="container">
+    <div class="section-head">
+      <p class="eyebrow">SHOP BY CATEGORY</p>
+      <h2>Everything to build your rig</h2>
+    </div>
+    <div class="cat-grid">
+      <a class="cat-card" href="#" data-cat="gpu">
+        <div class="cat-icon">🎮</div>
+        <h3>Graphics Cards</h3>
+        <p>RTX &amp; RX series GPUs</p>
+      </a>
+      <a class="cat-card" href="#" data-cat="cpu">
+        <div class="cat-icon">🧠</div>
+        <h3>Processors</h3>
+        <p>Intel &amp; AMD CPUs</p>
+      </a>
+      <a class="cat-card" href="#" data-cat="ram">
+        <div class="cat-icon">📶</div>
+        <h3>Memory</h3>
+        <p>DDR5 &amp; DDR4 RAM kits</p>
+      </a>
+      <a class="cat-card" href="#" data-cat="storage">
+        <div class="cat-icon">💾</div>
+        <h3>Storage</h3>
+        <p>NVMe SSDs &amp; drives</p>
+      </a>
+      <a class="cat-card" href="#" data-cat="cooling">
+        <div class="cat-icon">❄️</div>
+        <h3>Cooling</h3>
+        <p>AIOs, fans &amp; air coolers</p>
+      </a>
+      <a class="cat-card" href="#" data-cat="cases">
+        <div class="cat-icon">🖥️</div>
+        <h3>Cases &amp; PSUs</h3>
+        <p>Cases &amp; power supplies</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FEATURED PRODUCTS ===== -->
+<section class="featured">
+  <div class="container">
+    <div class="section-head">
+      <p class="eyebrow">FEATURED PARTS</p>
+      <h2>Top picks this week</h2>
+    </div>
+    <div class="product-grid" id="product-grid">
+      <!-- product cards injected by script.js -->
+    </div>
+  </div>
+</section>
+
+<!-- ===== CUSTOM BUILD CTA ===== -->
+<section class="custom-cta" id="custom">
+  <div class="diag diag-blue-r"></div>
+  <div class="container custom-inner">
+    <div>
+      <p class="eyebrow">CUSTOM BUILDS</p>
+      <h2>Tell us your budget.<br>We'll build your dream PC.</h2>
+      <p class="hero-sub">Pick a budget, tell us what you use it for, and our builders will hand-pick every part and assemble it for you — pickup or delivery.</p>
+      <a href="#contact" class="btn btn-primary">Request a Custom Build</a>
+    </div>
+    <div class="custom-steps">
+      <div class="step"><span class="step-num">1</span><div><h4>Tell us your goals</h4><p>Gaming, editing, streaming — whatever you need.</p></div></div>
+      <div class="step"><span class="step-num">2</span><div><h4>We spec it out</h4><p>You get a full parts list and price before we start.</p></div></div>
+      <div class="step"><span class="step-num">3</span><div><h4>We build &amp; deliver</h4><p>Pick it up in store or have it shipped to your door.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== WHY US ===== -->
+<section class="why" id="why">
+  <div class="container">
+    <div class="section-head">
+      <p class="eyebrow">WHY OPTIMIZED PCS</p>
+      <h2>Built right. Priced fair.</h2>
+    </div>
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="why-icon">✅</div>
+        <h3>Tested Parts</h3>
+        <p>Every component is checked before it leaves our hands.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">🚚</div>
+        <h3>In-Store or Online</h3>
+        <p>Buy in person or order online — your call.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">🛠️</div>
+        <h3>Expert Builds</h3>
+        <p>Custom PCs assembled and cable-managed by hand.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">💬</div>
+        <h3>Real Support</h3>
+        <p>Questions before or after your purchase? We're here.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CONTACT / FOOTER ===== -->
+<footer class="site-footer" id="contact">
+  <div class="diag diag-pink-r"></div>
+  <div class="container footer-inner">
+    <div class="footer-brand">
+      <img src="logo.png" alt="Optimized PCs" class="brand-logo">
+      <span class="brand-name">OPTIMIZED PCS</span>
+      <p>optimizedpcs.com</p>
+    </div>
+
+    <div class="footer-col">
+      <h4>Shop</h4>
+      <a href="#shop">Graphics Cards</a>
+      <a href="#shop">Processors</a>
+      <a href="#shop">Memory</a>
+      <a href="#custom">Custom Builds</a>
+    </div>
+
+    <div class="footer-col">
+      <h4>Company</h4>
+      <a href="#why">Why Us</a>
+      <a href="#contact">Contact</a>
+    </div>
+
+    <div class="footer-col">
+      <h4>Get in touch</h4>
+      <form class="contact-form" id="contact-form">
+        <input type="email" placeholder="Your email" required>
+        <textarea placeholder="What do you need?" rows="3" required></textarea>
+        <button type="submit" class="btn btn-primary">Send</button>
+      </form>
+    </div>
+  </div>
+  <div class="container footer-bottom">
+    <p>&copy; <span id="year"></span> Optimized PCs. <span id="rights-trigger" class="rights-trigger">All rights reserved.</span></p>
+  </div>
+</footer>
+
+<!-- ===== EASTER EGG OVERLAY ===== -->
+<div class="brainrot-overlay" id="brainrot-overlay" aria-hidden="true">
+  <button class="brainrot-close" id="brainrot-close">✕ make it stop</button>
+  <div class="brainrot-flash"></div>
+  <div class="brainrot-emoji-field" id="brainrot-emoji-field"></div>
+  <div class="brainrot-center">
+    <div class="brainrot-big">SKIBIDI RIZZ ALERT 🚽🗿</div>
+    <div class="brainrot-sub">FANUM TAX HAS BEEN COLLECTED</div>
+    <div class="brainrot-sub2">ohio gyatt sigma only in ohio 💀💀💀</div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
