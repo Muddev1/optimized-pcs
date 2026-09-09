@@ -590,6 +590,71 @@ h1,h2,h3,h4{
   margin-bottom:16px;
 }
 .cart-checkout{ width:100%; }
+.cart-checkout:disabled{ opacity:.5; cursor:not-allowed; }
+
+/* ===========================================================
+   TOAST NOTIFICATIONS
+   =========================================================== */
+.toast-host{
+  position:fixed;
+  bottom:24px;
+  left:50%;
+  transform:translateX(-50%);
+  z-index:300;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  align-items:center;
+  pointer-events:none;
+}
+.toast{
+  background:var(--ink);
+  color:#fff;
+  padding:12px 22px;
+  border-radius:999px;
+  font-size:.88rem;
+  font-weight:600;
+  box-shadow:var(--shadow-lg);
+  opacity:0;
+  transform:translateY(12px);
+  transition:opacity .25s ease, transform .25s ease;
+}
+.toast.show{ opacity:1; transform:translateY(0); }
+
+/* Cart icon bump feedback on add */
+@keyframes cart-bump{
+  0%{ transform:scale(1); }
+  35%{ transform:scale(1.25); }
+  60%{ transform:scale(.95); }
+  100%{ transform:scale(1); }
+}
+.icon-btn.bump{ animation:cart-bump .4s ease; }
+.icon-btn.bump .cart-count{ animation:cart-bump .4s ease; }
+
+/* ===========================================================
+   SHOP FILTER PILL
+   =========================================================== */
+.filter-pill{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:14px;
+  margin:-24px 0 34px;
+  font-size:.9rem;
+  color:var(--ink-soft);
+}
+.filter-pill strong{ color:var(--ink); }
+.filter-pill button{
+  border:1px solid var(--line);
+  background:#fff;
+  border-radius:999px;
+  padding:6px 14px;
+  font-size:.82rem;
+  font-weight:600;
+  cursor:pointer;
+  color:var(--ink);
+}
+.filter-pill button:hover{ background:#f2f2f4; }
 
 /* ===========================================================
    BRAINROT EASTER EGG

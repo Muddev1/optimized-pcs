@@ -69,8 +69,14 @@ document.addEventListener('DOMContentLoaded', () => {
   const products = [...parts, ...prebuilts];
 
   const grid = document.getElementById('product-grid');
-  if (grid) {
-    grid.innerHTML = parts.map(p => `
+  const filterPill = document.getElementById('shop-filter-pill');
+  const filterLabel = document.getElementById('shop-filter-label');
+  const filterClear = document.getElementById('shop-filter-clear');
+
+  function renderParts(filterCat) {
+    if (!grid) return;
+    const list = filterCat ? parts.filter(p => p.cat === filterCat) : parts;
+    grid.innerHTML = list.map(p => `
       <div class="product-card">
         <div class="product-thumb">${p.icon}</div>
         <div class="product-body">
@@ -81,6 +87,33 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>
       </div>
     `).join('');
+
+    if (filterPill) filterPill.hidden = !filterCat;
+    if (filterLabel && filterCat) filterLabel.textContent = filterCat;
+  }
+
+  renderParts(null);
+
+  const CAT_MAP = {
+    gpu: 'Graphics Card',
+    cpu: 'Processor',
+    ram: 'Memory',
+    storage: 'Storage',
+    cooling: 'Cooling',
+    cases: 'Case & PSU',
+  };
+
+  document.querySelectorAll('.cat-card').forEach(card => {
+    card.addEventListener('click', (e) => {
+      e.preventDefault();
+      const catName = CAT_MAP[card.dataset.cat];
+      renderParts(catName || null);
+      document.getElementById('shop-parts')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+
+  if (filterClear) {
+    filterClear.addEventListener('click', () => renderParts(null));
   }
 
   const prebuiltGrid = document.getElementById('prebuilt-grid');
@@ -136,8 +169,11 @@ document.addEventListener('DOMContentLoaded', () => {
     if (ids.length === 0) {
       cartItemsEl.innerHTML = '<p class="cart-empty">Your cart is empty.</p>';
       if (cartSubtotalEl) cartSubtotalEl.textContent = '$0';
+      if (cartCheckout) cartCheckout.disabled = true;
       return;
     }
+
+    if (cartCheckout) cartCheckout.disabled = false;
 
     let subtotal = 0;
     cartItemsEl.innerHTML = ids.map(id => {
@@ -204,14 +240,39 @@ document.addEventListener('DOMContentLoaded', () => {
   if (cartClose) cartClose.addEventListener('click', closeCart);
   if (cartOverlay) cartOverlay.addEventListener('click', closeCart);
 
+  /* ---------- Toast notifications ---------- */
+  const toastHost = document.getElementById('toast-host');
+  function showToast(message) {
+    if (!toastHost) return;
+    const toast = document.createElement('div');
+    toast.className = 'toast';
+    toast.textContent = message;
+    toastHost.appendChild(toast);
+    requestAnimationFrame(() => toast.classList.add('show'));
+    setTimeout(() => {
+      toast.classList.remove('show');
+      setTimeout(() => toast.remove(), 250);
+    }, 2200);
+  }
+
+  function pulseCartIcon() {
+    if (!cartBtn) return;
+    cartBtn.classList.remove('bump');
+    void cartBtn.offsetWidth; // restart animation
+    cartBtn.classList.add('bump');
+  }
+
   function handleAddClick(e) {
     const btn = e.target.closest('.product-add');
     if (!btn) return;
+    const p = products.find(prod => prod.id === btn.dataset.id);
     addToCart(btn.dataset.id);
     const original = btn.textContent;
     btn.textContent = 'Added ✓';
     setTimeout(() => { btn.textContent = original; }, 1000);
-    openCart();
+    pulseCartIcon();
+    showToast(p ? `${p.name} added to cart` : 'Added to cart');
+    // Cart drawer stays closed here on purpose — it only opens via the cart icon.
   }
 
   if (grid) grid.addEventListener('click', handleAddClick);
