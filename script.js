@@ -21,24 +21,80 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  /* ---------- Product catalog ---------- */
-  const products = [
-    { id: 'gpu',    icon: '🎮', cat: 'Graphics Card', name: 'ROG RTX 4070 Ti Triple Fan',       price: 799 },
-    { id: 'cpu',    icon: '🧠', cat: 'Processor',     name: 'Ryzen 7 7800X3D',                  price: 379 },
-    { id: 'ram',    icon: '📶', cat: 'Memory',        name: 'Kingston Fury Beast 32GB DDR5',    price: 109 },
-    { id: 'ssd',    icon: '💾', cat: 'Storage',       name: 'Samsung 990 Pro 2TB NVMe',         price: 159 },
-    { id: 'cooler', icon: '❄️', cat: 'Cooling',       name: '360mm ARGB AIO Liquid Cooler',     price: 129 },
-    { id: 'case',   icon: '🖥️', cat: 'Case & PSU',    name: 'Tempered Glass Mid-Tower + PSU',   price: 189 },
+  /* ---------- Parts catalog ---------- */
+  const parts = [
+    { id: 'gpu',        icon: '🎮', cat: 'Graphics Card', name: 'ROG RTX 4070 Ti Triple Fan',       price: 799 },
+    { id: 'cpu',        icon: '🧠', cat: 'Processor',     name: 'Ryzen 7 7800X3D',                  price: 379 },
+    { id: 'ram',        icon: '📶', cat: 'Memory',        name: 'Kingston Fury Beast 32GB DDR5',    price: 109 },
+    { id: 'ssd',        icon: '💾', cat: 'Storage',       name: 'Samsung 990 Pro 2TB NVMe',         price: 159 },
+    { id: 'cooler',     icon: '❄️', cat: 'Cooling',       name: '360mm ARGB AIO Liquid Cooler',     price: 129 },
+    { id: 'case',       icon: '🖥️', cat: 'Case & PSU',    name: 'Tempered Glass Mid-Tower + PSU',   price: 189 },
+    { id: 'motherboard',icon: '🔌', cat: 'Motherboard',   name: 'B650 ATX Motherboard',              price: 189 },
+    { id: 'psu',        icon: '⚡', cat: 'Power Supply',  name: '850W 80+ Gold Modular PSU',        price: 119 },
+    { id: 'monitor',    icon: '🖼️', cat: 'Monitor',       name: '27" 165Hz QHD Gaming Monitor',      price: 249 },
+    { id: 'keyboard',   icon: '⌨️', cat: 'Peripherals',   name: 'Mechanical RGB Keyboard',           price: 79  },
+    { id: 'mouse',      icon: '🖱️', cat: 'Peripherals',   name: 'Wireless Gaming Mouse',             price: 59  },
+    { id: 'headset',    icon: '🎧', cat: 'Audio',         name: '7.1 Surround Gaming Headset',       price: 69  },
   ];
+
+  /* ---------- Prebuilt PCs catalog ($700–$2000) ---------- */
+  const prebuilts = [
+    {
+      id: 'pre-starter', icon: '🎮', cat: 'Prebuilt PC', name: 'Optimized Starter', price: 749,
+      specs: ['Ryzen 5 7600', 'RTX 4060 8GB', '16GB DDR5', '1TB NVMe SSD'],
+      blurb: '1080p gaming, smooth and reliable.'
+    },
+    {
+      id: 'pre-core', icon: '🕹️', cat: 'Prebuilt PC', name: 'Optimized Core', price: 1099,
+      specs: ['Ryzen 7 7700', 'RTX 4070 12GB', '32GB DDR5', '1TB NVMe SSD'],
+      blurb: '1440p high-refresh gaming rig.'
+    },
+    {
+      id: 'pre-pro', icon: '🚀', cat: 'Prebuilt PC', name: 'Optimized Pro', price: 1499,
+      specs: ['Ryzen 7 7800X3D', 'RTX 4070 Ti 12GB', '32GB DDR5', '2TB NVMe SSD'],
+      blurb: 'Built for competitive 1440p esports.'
+    },
+    {
+      id: 'pre-elite', icon: '👑', cat: 'Prebuilt PC', name: 'Optimized Elite', price: 1899,
+      specs: ['Ryzen 9 7900X', 'RTX 4080 Super 16GB', '32GB DDR5', '2TB NVMe SSD'],
+      blurb: '4K gaming and heavy creative workloads.'
+    },
+    {
+      id: 'pre-ultra', icon: '🏆', cat: 'Prebuilt PC', name: 'Optimized Ultra', price: 1999,
+      specs: ['Ryzen 9 9950X', 'RTX 4090 24GB', '64GB DDR5', '2TB NVMe SSD'],
+      blurb: 'The no-compromise flagship build.'
+    },
+  ];
+
+  const products = [...parts, ...prebuilts];
 
   const grid = document.getElementById('product-grid');
   if (grid) {
-    grid.innerHTML = products.map(p => `
+    grid.innerHTML = parts.map(p => `
       <div class="product-card">
         <div class="product-thumb">${p.icon}</div>
         <div class="product-body">
           <span class="product-cat">${p.cat}</span>
           <span class="product-name">${p.name}</span>
+          <span class="product-price">$${p.price}</span>
+          <button class="product-add" data-id="${p.id}">Add to Cart</button>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  const prebuiltGrid = document.getElementById('prebuilt-grid');
+  if (prebuiltGrid) {
+    prebuiltGrid.innerHTML = prebuilts.map(p => `
+      <div class="product-card prebuilt-card">
+        <div class="product-thumb">${p.icon}</div>
+        <div class="product-body">
+          <span class="product-cat">${p.cat}</span>
+          <span class="product-name">${p.name}</span>
+          <p class="prebuilt-blurb">${p.blurb}</p>
+          <ul class="prebuilt-specs">
+            ${p.specs.map(s => `<li>${s}</li>`).join('')}
+          </ul>
           <span class="product-price">$${p.price}</span>
           <button class="product-add" data-id="${p.id}">Add to Cart</button>
         </div>
@@ -148,17 +204,18 @@ document.addEventListener('DOMContentLoaded', () => {
   if (cartClose) cartClose.addEventListener('click', closeCart);
   if (cartOverlay) cartOverlay.addEventListener('click', closeCart);
 
-  if (grid) {
-    grid.addEventListener('click', (e) => {
-      const btn = e.target.closest('.product-add');
-      if (!btn) return;
-      addToCart(btn.dataset.id);
-      const original = btn.textContent;
-      btn.textContent = 'Added ✓';
-      setTimeout(() => { btn.textContent = original; }, 1000);
-      openCart();
-    });
+  function handleAddClick(e) {
+    const btn = e.target.closest('.product-add');
+    if (!btn) return;
+    addToCart(btn.dataset.id);
+    const original = btn.textContent;
+    btn.textContent = 'Added ✓';
+    setTimeout(() => { btn.textContent = original; }, 1000);
+    openCart();
   }
+
+  if (grid) grid.addEventListener('click', handleAddClick);
+  if (prebuiltGrid) prebuiltGrid.addEventListener('click', handleAddClick);
 
   if (cartItemsEl) {
     cartItemsEl.addEventListener('click', (e) => {
